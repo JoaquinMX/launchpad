@@ -5,11 +5,13 @@ class Tile extends StatefulWidget {
   late final Color centerColor;
   late final Color outlineColor;
   late final String sound;
+  late final squareSize;
 
   Tile(
       {required this.centerColor,
       required this.outlineColor,
       required this.sound,
+      required this.squareSize,
       super.key});
 
   @override
@@ -30,18 +32,20 @@ class _TileState extends State<Tile> {
         temporalColorChange();
       },
       child: Container(
-        width: 100,
-        height: 100,
+        width: widget.squareSize,
+        height: widget.squareSize,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: RadialGradient(
-              center: Alignment(0, 0),
-              radius: .5,
-              colors: changeColor
-                  ? [Colors.white, Colors.white]
-                  : [widget.centerColor, widget.outlineColor],
-              stops: [0, 1.0],
-            )),
+          borderRadius: BorderRadius.circular(10),
+          gradient: RadialGradient(
+            center: Alignment(0, 0),
+            radius: .5,
+            colors: changeColor
+                ? [Colors.white, Colors.white]
+                : [widget.centerColor, widget.outlineColor],
+            stops: [0, 1.0],
+          ),
+          boxShadow: [BoxShadow(color: Colors.pink, blurRadius: 5)],
+        ),
         clipBehavior: Clip.antiAlias,
       ),
     );

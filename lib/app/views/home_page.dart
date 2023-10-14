@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'commons/tile.dart';
 
@@ -37,9 +38,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Launchpad'),
+        title: Text(
+          'LaunchPad',
+          style: GoogleFonts.orbitron(),
+        ),
       ),
       body: Center(
         child: GridView(
@@ -49,18 +54,19 @@ class HomePage extends StatelessWidget {
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
           ),
-          children: listOfTiles(context),
+          children: listOfTiles(context, width),
         ),
       ),
     );
   }
 
-  List<Widget> listOfTiles(BuildContext context) {
+  List<Widget> listOfTiles(BuildContext context, width) {
     List<Widget> tiles = [];
     int soundListLength = soundList.length;
     for (int i = 0; i < soundListLength; i++) {
       tiles.add(
         Tile(
+          squareSize: (width / 4) - 20,
           sound: soundList[soundListLength - 1 - i],
           centerColor: i % 4 == 0
               ? Theme.of(context).colorScheme.tertiaryContainer
